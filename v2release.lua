@@ -353,7 +353,7 @@ local args = string.split(msg, " ")
         | demesh   | demesh, demeshes current tool                 |
         | sync     | manually sync current boxes                   |
         | grab     | grab (plr) copies plr's song id               |
-        | playlist | playlist (songname), plays from audios folder |
+        | playfile | playfile (songname), plays from audios folder |
         |__________|_______________________________________________|
         
         goopy's visualizer | ]]..getgenv().username.." | "..os.date("%X",os.time()).. " " ..os.date("%p",os.time()).. [[
@@ -438,10 +438,10 @@ lp.Chatted:Connect(function(msg)
     end
 end)
 
---playlist cmd v 
+--playfile cmd v 
 lp.Chatted:Connect(function(msg)
     local args = string.split(msg, " ")
-    if args[1] == "/playlist" then
+    if args[1] == "/playfile" then
         for i,v in pairs(listfiles("goopysvisualizer/audiolist/audios")) do
             print(i,v)
             print(string.sub(tostring(v), 35))
