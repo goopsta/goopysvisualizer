@@ -275,19 +275,19 @@ function getPlayer(Input)
     end
 end
 
--- 
+-- grab function v 
 function grab(plr)
-    pcall(function()
-        notif(plr.Name.." is currently playing : "..string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33))
-        wait(0.1)
-        setclipboard(tostring(string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33)))
-        notif("the id has been copied to your clipboard!")
-    end)
+    notif(plr.Name.." is currently playing : "..string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33))
+    wait(0.1)
+    setclipboard(tostring(string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33)))
+    notif("the id has been copied to your clipboard!")
 end
 
 -- mute function v 
 function mute(plr)
-    plr.Character:WaitForChild("BoomBox").Handle.Sound.Playing = false
+    pcall(function()
+        plr.Character:WaitForChild("BoomBox").Handle.Sound.Playing = false
+    end)
 end
 
 -- mute thread v 
@@ -356,6 +356,7 @@ local args = string.split(msg, " ")
         | sync     | manually sync current boxes                   |
         | grab     | grab (plr) copies plr's song id               |
         | playfile | playfile (songname), plays from audios folder |
+        | filelist | filelist, prints all your file names          |
         |__________|_______________________________________________|
         
         goopy's visualizer | ]]..lp.DisplayName.." | "..os.date("%X",os.time()).. " " ..os.date("%p",os.time()).. [[
@@ -458,6 +459,18 @@ lp.Chatted:Connect(function(msg)
     end
 end)
 
+--filelist cmd v 
+lp.Chatted:Connect(function(msg)
+    local args = string.split(msg, " ")
+    if args[1] == "/filelist" then
+        for i,v in pairs(listfiles("goopysvisualizer/audiolist/audios")) do
+            print(string.sub(tostring(v), 35))
+        end
+        notif("printed all your file names!")
+        notif("press f9 to check your console.")
+    end
+end)
+
 -- mute cmd v
 lp.Chatted:Connect(function(msg)
     local args = string.split(msg, " ")
@@ -510,9 +523,6 @@ manager:Connect("ExploiterJoined", function(plr)
 end)
 
 plrs:Chat(secret)
-
-
-
 
 
 
