@@ -84,7 +84,7 @@ runService.RenderStepped:Connect(function(deltaTime)
            if curTick - eventLog.startTick > eventLog.lifeTime then
                task.spawn(eventLog.Destroy, eventLog)
                table.remove(eventLogs, i)
-           elseif count > 10 and not removedFirst then
+           elseif count > 30 and not removedFirst then
                removedFirst = true
                local first = table.remove(eventLogs, 1)
                task.spawn(first.Destroy, first)
