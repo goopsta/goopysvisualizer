@@ -275,12 +275,14 @@ function getPlayer(Input)
     end
 end
 
--- grab function v 
+-- 
 function grab(plr)
-    notif(plr.Name.." is currently playing : "..string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33))
-    wait(0.1)
-    setclipboard(tostring(string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33)))
-    notif("the id has been copied to your clipboard!")
+    pcall(function()
+        notif(plr.Name.." is currently playing : "..string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33))
+        wait(0.1)
+        setclipboard(tostring(string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33)))
+        notif("the id has been copied to your clipboard!")
+    end)
 end
 
 -- mute function v 
