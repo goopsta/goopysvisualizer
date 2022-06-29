@@ -496,6 +496,7 @@ end)
 
 local signalModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/Stefanuk12/Signal/main/Manager.lua"))()
 local manager = signalModule.new()
+local plrs = game:GetService("Players")
 
 local secret = "goopy visualizer awsome wow amazing very awsome very good very nice"
 
