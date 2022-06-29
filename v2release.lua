@@ -356,7 +356,7 @@ local args = string.split(msg, " ")
         | playfile | playfile (songname), plays from audios folder |
         |__________|_______________________________________________|
         
-        goopy's visualizer | ]]..getgenv().username.." | "..os.date("%X",os.time()).. " " ..os.date("%p",os.time()).. [[
+        goopy's visualizer | ]]..lp.DisplayName.." | "..os.date("%X",os.time()).. " " ..os.date("%p",os.time()).. [[
 
 
 
