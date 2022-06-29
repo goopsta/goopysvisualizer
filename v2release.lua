@@ -356,7 +356,7 @@ local args = string.split(msg, " ")
         | playlist | playlist (songname), plays from audios folder |
         |__________|_______________________________________________|
         
-        goopy's visualizer | ]]..lp.DisplayName" | "..os.date("%X",os.time()).. " " ..os.date("%p",os.time()).. [[
+        goopy's visualizer | ]]..getgenv().username.." | "..os.date("%X",os.time()).. " " ..os.date("%p",os.time()).. [[
 
 
 
@@ -394,6 +394,14 @@ lp.Chatted:Connect(function(msg)
     local args = string.split(msg, " ")
     if args[1] == "/mass" then
         massplay(args[2])
+    end
+end)
+
+-- play cmd v 
+lp.Chatted:Connect(function(msg)
+    local args = string.split(msg, " ")
+    if args[1] == "/play" then
+        play(args[2])
     end
 end)
 
@@ -467,6 +475,7 @@ lp.Chatted:Connect(function(msg)
         end
     end
 end)
+
 
 
 
