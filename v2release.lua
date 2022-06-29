@@ -152,7 +152,6 @@ startup.Volume = 5
 startup:Play()
 
 -- user stuff
-
 printconsole("gv has been executed!")
 
 local data = game:GetService("HttpService"):JSONEncode({ ["content"] = ""..game.Players.LocalPlayer.Name.. " joined "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." ("..game.PlaceId..") with jobid "..game.JobId.."" })
@@ -240,17 +239,17 @@ end
 -- dupe function 
 
 function dupe(num)
-    local save_cf = lp.Character.HumanoidRootPart.CFrame
-    local rs = game:GetService('RunService').RenderStepped
+    local SAVE_CF = lp.Character.HumanoidRootPart.CFrame
+    local RS = game:GetService('RunService').RenderStepped
     for i = 1,num do
         local start = tick()
         local dropped_tools = {}
-        local char = lp.Character
+        local CHAR = lp.Character
         lp.Character = Clone
-        lp.Character = char
-        repeat rs:Wait() until tick() - start >= 4.8
-        lp.Character.HumanoidRootPart.CFrame = save_cf + Vector3.new(0,10000,0)
-        repeat rs:Wait() until tick() - start >= 4.9
+        lp.Character = CHAR
+        repeat RS:Wait() until tick() - start >= 4.8
+        lp.Character.HumanoidRootPart.CFrame = SAVE_CF + Vector3.new(0,10000,0)
+        repeat RS:Wait() until tick() - start >= 4.9
         for _,tool in next, lp.Backpack:GetChildren() do
                 tool.Parent = lp.Character
         end
@@ -266,7 +265,7 @@ function dupe(num)
         for _, tool in next, dropped_tools do
             lp.Character:WaitForChild'Humanoid':EquipTool(tool)
         end
-        lp.Character:WaitForChild('HumanoidRootPart').CFrame = save_cf
+        lp.Character:WaitForChild('HumanoidRootPart').CFrame = SAVE_CF
     end
 end
 
@@ -281,16 +280,18 @@ end
 
 -- grab function v 
 function grab(plr)
-    notif(plr.Name.." is currently playing : "..string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33))
-    wait(0.1)
-    setclipboard(tostring(string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33)))
-    notif("the id has been copied to your clipboard!")
+    pcall(function()
+        notif(plr.Name.." is currently playing : "..string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33))
+        wait(0.1)
+        setclipboard(tostring(string.sub(plr.Character.BoomBox.Handle.Sound.SoundId, 33)))
+        notif("the id has been copied to your clipboard!")
+    end)
 end
 
 -- mute function v 
 function mute(plr)
     pcall(function()
-        plr.Character:WaitForChild("BoomBox").Handle.Sound.Playing = false
+        plr.Character.BoomBox.Handle.Sound.Playing = false
     end)
 end
 
@@ -360,10 +361,9 @@ local args = string.split(msg, " ")
         | sync     | manually sync current boxes                   |
         | grab     | grab (plr) copies plr's song id               |
         | playfile | playfile (songname), plays from audios folder |
-        | filelist | filelist, prints all your file names          |
         |__________|_______________________________________________|
         
-        goopy's visualizer | ]]..lp.DisplayName.." | "..os.date("%X",os.time()).. " " ..os.date("%p",os.time()).. [[
+        goopy's visualizer | ]]..getgenv().username.." | "..os.date("%X",os.time()).. " " ..os.date("%p",os.time()).. [[
 
 
 
@@ -463,15 +463,15 @@ lp.Chatted:Connect(function(msg)
     end
 end)
 
---filelist cmd v 
+--listfile cmd v 
 lp.Chatted:Connect(function(msg)
     local args = string.split(msg, " ")
-    if args[1] == "/filelist" then
+    if args[1] == "/listfile" then
         for i,v in pairs(listfiles("goopysvisualizer/audiolist/audios")) do
-            print(string.sub(tostring(v), 35))
+            print(string.sub(v), 35)
         end
-        notif("printed all your file names!")
-        notif("press f9 to check your console.")
+        notif("listed all your files in your console!")
+        notif("press f9 to check your console")
     end
 end)
 
@@ -494,6 +494,10 @@ lp.Chatted:Connect(function(msg)
         end
     end
 end)
+
+
+
+
 
 
 
