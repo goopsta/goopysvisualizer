@@ -236,17 +236,17 @@ end
 -- dupe function 
 
 function dupe(num)
-    local SAVE_CF = lp.Character.HumanoidRootPart.CFrame
-    local RS = game:GetService('RunService').RenderStepped
+    local save_cf = lp.Character.HumanoidRootPart.CFrame
+    local rs = game:GetService('RunService').RenderStepped
     for i = 1,num do
         local start = tick()
         local dropped_tools = {}
-        local CHAR = lp.Character
+        local char = lp.Character
         lp.Character = Clone
-        lp.Character = CHAR
-        repeat RS:Wait() until tick() - start >= 4.8
-        lp.Character.HumanoidRootPart.CFrame = SAVE_CF + Vector3.new(0,10000,0)
-        repeat RS:Wait() until tick() - start >= 4.9
+        lp.Character = char
+        repeat rs:Wait() until tick() - start >= 4.8
+        lp.Character.HumanoidRootPart.CFrame = save_cf + Vector3.new(0,10000,0)
+        repeat rs:Wait() until tick() - start >= 4.9
         for _,tool in next, lp.Backpack:GetChildren() do
                 tool.Parent = lp.Character
         end
@@ -262,7 +262,7 @@ function dupe(num)
         for _, tool in next, dropped_tools do
             lp.Character:WaitForChild'Humanoid':EquipTool(tool)
         end
-        lp.Character:WaitForChild('HumanoidRootPart').CFrame = SAVE_CF
+        lp.Character:WaitForChild('HumanoidRootPart').CFrame = save_cf
     end
 end
 
